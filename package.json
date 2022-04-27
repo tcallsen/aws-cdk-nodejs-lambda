@@ -5,12 +5,12 @@
     "aws-cdk-nodejs-lambda": "bin/aws-cdk-nodejs-lambda.js"
   },
   "scripts": {
-    "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
-    "cdk": "cdk",
-    "test": "jest"
+    "deploy": "cdk deploy",
+    "postdeploy": "node ./postdeploy/getDeployedApiGatewayRestApiUrl.js"
   },
   "devDependencies": {
     "aws-cdk": "2.21.1",
+    "aws-sdk": "^2.1122.0",
     "jest": "^26.4.2"
   },
   "dependencies": {

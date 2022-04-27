@@ -3,8 +3,10 @@
 const cdk = require('aws-cdk-lib');
 const { AwsCdkNodejsLambdaStack } = require('../lib/aws-cdk-nodejs-lambda-stack');
 
+const { AWS_CDK_STACK_NAME } = require('../lib/constants');
+
 const app = new cdk.App();
-new AwsCdkNodejsLambdaStack(app, 'GeoSampleStack', {
+new AwsCdkNodejsLambdaStack(app, AWS_CDK_STACK_NAME, {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
