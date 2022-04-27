@@ -1,12 +1,35 @@
-# Welcome to your CDK JavaScript project
+# Sample API Gateway / Node.js Lambda created with CDK
 
-This is a blank project for CDK development with JavaScript.
+This is a sample project that defines a Node.js Lambda function that is accessible via API Gateway. The stack is defined and deployed using AWS CDK.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app. The build step is not required when using JavaScript.
+When envoking the Lambda, either directly or via API Gateway, a static list of hikes is returned in JSON format. This list is defined in the [handler function](handler/index.js).
 
-## Useful commands
+## Local Execution
 
-* `npm run test`         perform the jest unit tests
-* `cdk deploy`           deploy this stack to your default AWS account/region
-* `cdk diff`             compare deployed stack with current state
-* `cdk synth`            emits the synthesized CloudFormation template
+This Lambda can be executed locally with [SAM](https://aws.amazon.com/serverless/sam/) / Docker using the following command:
+
+```
+cdk synth > template.yml && sam local invoke -t cdk.out/GeoSampleStack.template.json getHikesLambdaFunction
+```
+
+## Deployment
+
+This stack can be deployed to AWS with the following command:
+
+```
+cdk deploy
+```
+
+**Note:** CDK bootstrap must be executed once prior to the first deployment. To bootstrap, execute: 
+
+```
+cdk bootstrap
+```
+
+## Repo Archetype
+
+This repository was initialized in April 2022 with the following CDK command:
+
+```
+cdk init app --language javascript
+```
