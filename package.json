@@ -6,7 +6,7 @@
   },
   "scripts": {
     "deploy": "cdk deploy",
-    "postdeploy": "node ./postdeploy/getDeployedApiGatewayRestApiUrl.js"
+    "postdeploy": "node ./postdeploy/getDeployedApiGatewayRestApiUrl.js && node ./postdeploy/getDeployedLambdaARN.js"
   },
   "devDependencies": {
     "aws-cdk": "2.21.1",

@@ -28,10 +28,7 @@ const getApiGatewayRestApiUrl =  async function(restApiName) {
   // find restApiId - uses older verion of AWS SDK
   //  https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/APIGateway.html
   const restApiResults = await apigateway.getRestApis().promise();
-  const restApi = restApiResults.items.find(api => {
-    console.log('exam', api.name)
-    return api.name === restApiName}
-  );
+  const restApi = restApiResults.items.find(api => api.name === restApiName );
 
   // get rest api resourceId
   if (restApi && restApi.id) {
@@ -49,14 +46,11 @@ const getApiGatewayRestApiUrl =  async function(restApiName) {
 }
 
 /**
- * Main executable function for this Postdeploy script. Queries AWS to find the URL a REST API hosted
- * inside AWS API Gateway.
+ * Queries AWS to find the URL a REST API hosted inside AWS API Gateway.
  *
  * @throws {Error} Throws an Error if there is an issue determining the REST API URL.
  */
 const main = async function() {
-
-console.log('here b');
 
   const restApiUrl = await getApiGatewayRestApiUrl(API_GATEWAY_REST_API_NAME);
 
@@ -66,5 +60,4 @@ console.log('here b');
   return true;
 }
 
-console.log('here');
 main();
