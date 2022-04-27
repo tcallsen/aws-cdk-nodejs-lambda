@@ -12,7 +12,13 @@ This Lambda can be executed locally with [SAM](https://aws.amazon.com/serverless
 cdk synth > template.yml && sam local invoke -t cdk.out/GeoSampleStack.template.json getHikesLambdaFunction
 ```
 
-## Deployment
+To stand up the API Gateway endpoint locally (accessible from `http://127.0.0.1:3000`), execute the following command:
+
+```
+cdk synth > template.yml && sam local start-api -t ./cdk.out/GeoSampleStack.template.json
+```
+
+## Deployment to AWS
 
 This stack can be deployed to AWS with the following command:
 
