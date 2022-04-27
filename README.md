@@ -32,6 +32,13 @@ cdk deploy
 cdk bootstrap
 ```
 
+## Deployed AWS Resource Locations (ARN and URL)
+
+Two npm `postdeploy` scripts are included that query AWS for the locations of deployed resouces. These URLs/ARNs can be passed to downstream consumers of these services via CI/CD variables or other configuration.
+
+1. [getDeployedLambdaARN.js](postdeploy/getDeployedLambdaARN.js) - determines the ARN for the deployed Lambda function based on the stack and function names set during CDK definition.
+2. [getDeployedApiGatewayRestApiUrl.js](postdeploy/getDeployedApiGatewayRestApiUrl.js) - returns the URL for the deployed API Gateway REST API used to invoke this Lambda function.
+
 ## Repo Archetype
 
 This repository was initialized in April 2022 with the following CDK command:
