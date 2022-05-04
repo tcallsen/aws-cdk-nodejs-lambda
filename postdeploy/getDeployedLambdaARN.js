@@ -15,12 +15,11 @@ const AWS = require('aws-sdk');
  * Queries AWS to find a Lambda function's ARN based on the supplied stack name and function name 
  * used when creating the Lambda with the CDK.
  *
- * @param {string} stackName the Lambda function's Stack Name (defined in bin/aws-cdk-nodejs-lambda.js).
- * @param {string} constructName the Lambda function's Name (defined in lib/aws-cdk-nodejs-lambda-stack.js).
+ * @param {string} lambdaFunctionName the Lambda function's Name (defined in lib/aws-cdk-nodejs-lambda-stack.js).
  * @returns {string} Full AWS ARN for the Lambda function.
  * @throws {Error} Will throw an error if the Lambda function cannot be found.
  */
- const getLambdaFunctionArn =  async function(stackName, constructName) {
+ const getLambdaFunctionArn =  async function(lambdaFunctionName) {
 
   const lambda = new AWS.Lambda({
     apiVersion: '2015-03-31',
@@ -37,14 +36,14 @@ const AWS = require('aws-sdk');
 
   for (let i = 0; i < results.Functions.length; ++i) {
     const lambdaFunction = results.Functions[i];
-    // match function by CDK stack name and construct name
-    if (lambdaFunction.FunctionName.startsWith(stackName) && lambdaFunction.FunctionName.includes(constructName)) {
+    // match function by CDK defined lambda function name
+    if (lambdaFunction.FunctionName.includes(lambdaFunctionName)) {
       return lambdaFunction.FunctionArn;
     }
   }
 
   // throw exception if ARN is not found
-  throw new Error(`Unable to find AWS Lambda ARN for stack ${stackName} and construct ${constructName}`);
+  throw new Error(`Unable to find AWS Lambda ARN for function name '${lambdaFunctionName}'`);
 
 }
 
@@ -55,7 +54,7 @@ const AWS = require('aws-sdk');
  */
 const main = async function() {
 
-  const functionArn = await getLambdaFunctionArn(AWS_CDK_STACK_NAME, LAMBDA_FUNCTION_NAME)
+  const functionArn = await getLambdaFunctionArn(LAMBDA_FUNCTION_NAME)
 
   // Lambda Function ARN now available - can store as CI/CD variable, AWS SSM, or use in other CI/CD process
   console.log('functionArn', functionArn);

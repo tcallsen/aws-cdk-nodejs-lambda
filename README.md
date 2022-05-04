@@ -20,10 +20,16 @@ cdk synth > template.yml && sam local start-api -t ./cdk.out/GeoSampleStack.temp
 
 ## Deployment to AWS
 
+Ensure that the following environment variables are defined prior to deployment:
+
+- `CDK_DEPLOY_REGION` - e.g. `us-east-1`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+
 This stack can be deployed to AWS with the following command:
 
 ```
-cdk deploy
+npm run deploy
 ```
 
 **Note:** CDK bootstrap must be executed once prior to the first deployment. To bootstrap, execute: 
